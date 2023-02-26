@@ -3,6 +3,7 @@ import Header from './Header.js'
 import Main from './Main.js'
 import Footer from './Footer.js'
 import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
 
 function App() {
   return (
@@ -35,21 +36,9 @@ function App() {
         <div className="popup__error avatar-error"></div>
       </PopupWithForm>
 
-      <PopupWithForm title="Вы уверены?" name="delete">
+      <PopupWithForm title="Вы уверены?" name="delete" />
 
-
-      </PopupWithForm>
-
-
-      <div className="popup popup_type_zoom">
-        <div className="popup__img-container">
-          <button type="button" className="button popup__close" aria-label="Закрыть"></button>
-          <figure className="popup__figure">
-            <img className="popup__img" src="#" alt="" />
-            <figcaption className="popup__caption"></figcaption>
-          </figure>
-        </div>
-      </div>
+      <ImagePopup />
 
       <template className="card-template">
         <li className="card">
