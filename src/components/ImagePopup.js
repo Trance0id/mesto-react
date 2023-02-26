@@ -1,7 +1,6 @@
-import React from "react";
- function ImagePopup({card, onClose}) {
+function ImagePopup({ card, onClose }) {
   return (
-    <div className={`popup popup_type_zoom ${card.isOpened && 'popup_opened'}`} onClick={onClose}>
+    <div className={`popup popup_type_zoom ${card.name && 'popup_opened'}`} onClick={onClose}>
       <div className="popup__img-container" onClick={e => e.stopPropagation()}>
         <button type="button" className="button popup__close" aria-label="Закрыть" onClick={onClose}></button>
         <figure className="popup__figure">
@@ -11,6 +10,6 @@ import React from "react";
       </div>
     </div>
   );
- }
+}
 
- export default ImagePopup;
+export default ImagePopup;

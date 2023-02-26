@@ -1,4 +1,3 @@
-import React from 'react';
 import logoMesto from '../images/logo/mesto-white.svg'
 
 function Header() {

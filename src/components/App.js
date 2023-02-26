@@ -1,10 +1,9 @@
 import React from 'react';
-import Header from './Header.js'
-import Main from './Main.js'
-import Footer from './Footer.js'
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
-import api from '../utils/Api.js';
 
 function App() {
 
@@ -24,22 +23,22 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard({isOpened: false})
+    setSelectedCard({});
   }
 
   function handleCardClick(card) {
-    setSelectedCard({isOpened: true, ...card});
+    setSelectedCard(card);
   }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({isOpened: false});
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   return (
     <div className="page">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
       <Footer />
 
       <PopupWithForm title="Редактировать профиль" name="edit" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>

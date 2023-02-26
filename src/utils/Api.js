@@ -1,4 +1,9 @@
-import { apiConfig } from "./constants.js";
+const API_CONFIG = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60/',
+  headers: {
+    authorization: 'fac9339f-e6fd-4202-9057-cf36536b9501'
+  }
+};
 
 class Api {
 
@@ -30,33 +35,8 @@ _headers;
   getInitialCards() {
     return this._callFetch('cards');
   }
-
-  updateUserInfo(body) {
-    return this._callFetch('users/me', 'PATCH', body, 'application/json');
-  }
-
-  changeAvatar(body) {
-    return this._callFetch('users/me/avatar', 'PATCH', body, 'application/json');
-  }
-
-  addNewCard(body) {
-    return this._callFetch('cards', 'POST', body, 'application/json');
-  }
-
-  deleteCard(cardId) {
-    return this._callFetch(`cards/${cardId}`, 'DELETE');
-  }
-
-  likeCard(cardId) {
-    return this._callFetch(`cards/${cardId}/likes`, 'PUT');
-  }
-
-  unlikeCard(cardId) {
-    return this._callFetch(`cards/${cardId}/likes`, 'DELETE');
-  }
-
 }
 
-const api = new Api(apiConfig);
+const api = new Api(API_CONFIG);
 
 export default api;

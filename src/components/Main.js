@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../utils/Api.js';
+import api from '../utils/api.js';
 import Card from './Card.js';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
@@ -34,8 +34,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   return (
     <main className="content">
       <section className="profile" aria-label="Данные профиля">
-        <div className="profile__avatar-wrapper">
-          <img src={userAvatar} alt="Аватар пользователя" className="profile__avatar" />
+        <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}>
           <button type="button" className="profile__avatar-button" aria-label="Изменить аватар" onClick={onEditAvatar}></button>
         </div>
         <div className="profile__info">
@@ -49,7 +48,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
         <ul className="cards__list">
           {
             cards.map(card =>
-              <Card card={card} onCardClick={onCardClick}/>
+              <Card key={card._id} card={card} onCardClick={onCardClick} />
             )
           }
         </ul>

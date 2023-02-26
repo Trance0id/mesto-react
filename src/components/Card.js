@@ -1,14 +1,12 @@
-import React from "react";
-
 function Card({ card, onCardClick }) {
+
   function handleCardClick() {
-    // console.log(`card ${card.name} clicked!`)
     onCardClick(card)
   }
 
   return (
     <li className="card">
-      <img className="card__image" src={card.link} alt={card.name} onClick={handleCardClick}/>
+      <div className="card__image" style={{ backgroundImage: `url(${card.link})` }} onClick={handleCardClick}></div>
       <div className="card__caption">
         <h2 className="card__caption-title">{card.name}</h2>
         <div className="card__like">
