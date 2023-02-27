@@ -42,26 +42,64 @@ function App() {
       <Footer />
 
       <PopupWithForm title="Редактировать профиль" name="edit" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-        <input type="text" placeholder="Имя" className="popup__input" name="name" required minLength="2" maxLength="40"
-          autoComplete="off" />
+        <input
+          type="text"
+          placeholder="Имя"
+          className="popup__input"
+          name="name"
+          required
+          minLength="2"
+          maxLength="40"
+          autoComplete="off"
+        />
         <div className="popup__error name-error"></div>
-        <input type="text" placeholder="Вид деятельности" className="popup__input" name="about" required minLength="2"
-          maxLength="200" autoComplete="off" />
+        <input
+          type="text"
+          placeholder="Вид деятельности"
+          className="popup__input"
+          name="about"
+          required
+          minLength="2"
+          maxLength="200"
+          autoComplete="off"
+        />
         <div className="popup__error about-error"></div>
       </PopupWithForm>
 
       <PopupWithForm title="Новое место" name="add" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-        <input type="text" className="popup__input" name="name" placeholder="Название" required minLength="2"
-          maxLength="30" autoComplete="off" />
+        <input
+          type="text"
+          className="popup__input"
+          name="name"
+          placeholder="Название"
+          required
+          minLength="2"
+          maxLength="30"
+          autoComplete="off"
+        />
         <div className="popup__error name-error"></div>
-        <input type="url" className="popup__input" name="link" placeholder="Ссылка на картинку" required
-          autoComplete="off" />
+        <input
+          type="url"
+          className="popup__input"
+          name="link"
+          placeholder="Ссылка на картинку"
+          required
+          autoComplete="off"
+        />
         <div className="popup__error link-error"></div>
       </PopupWithForm>
 
       <PopupWithForm title="Обновить аватар" name="avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-        <input type="text" className="popup__input" name="avatar" placeholder="Ссылка на аватар" required minLength="2"
-          maxLength="30" autoComplete="off" />
+        <input
+          type="text"
+          className="popup__input"
+          name="avatar"
+          placeholder="Ссылка на аватар"
+          required
+          minLength="2"
+          maxLength="30"
+          autoComplete="off"
+        />
         <div className="popup__error avatar-error"></div>
       </PopupWithForm>
 

@@ -1,7 +1,7 @@
 const API_CONFIG = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60/',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59/',
   headers: {
-    authorization: 'fac9339f-e6fd-4202-9057-cf36536b9501'
+    authorization: '66368252-4907-4b17-913b-366c2f7ebfd6'
   }
 };
 

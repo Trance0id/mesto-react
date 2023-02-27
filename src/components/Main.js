@@ -35,14 +35,14 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     <main className="content">
       <section className="profile" aria-label="Данные профиля">
         <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}>
-          <button type="button" className="profile__avatar-button" aria-label="Изменить аватар" onClick={onEditAvatar}></button>
+          <button type="button" className="profile__avatar-button" aria-label="Изменить аватар" onClick={onEditAvatar}/>
         </div>
         <div className="profile__info">
           <h1 className="profile__name">{userName}</h1>
-          <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={onEditProfile}></button>
+          <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={onEditProfile}/>
           <p className="profile__description">{userDescription}</p>
         </div>
-        <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={onAddPlace}></button>
+        <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={onAddPlace}/>
       </section>
       <section className="cards" aria-label="Карточки профиля">
         <ul className="cards__list">
