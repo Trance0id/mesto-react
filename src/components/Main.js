@@ -1,24 +1,12 @@
 import React from "react";
+import { CardsContext } from "../contexts/CardsContext.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import api from "../utils/api.js";
 import Card from "./Card.js";
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const [cards, setCards] = React.useState([]);
-
   const currentUser = React.useContext(CurrentUserContext);
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(`Не удалось получить ответ от сервера. \n${err}`);
-      });
-  }, []);
+  const cards = React.useContext(CardsContext);
 
   return (
     <main className="content">
