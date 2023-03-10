@@ -1,31 +1,20 @@
-import React from 'react';
-import api from '../utils/api.js';
-import Card from './Card.js';
+import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import api from "../utils/api.js";
+import Card from "./Card.js";
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then(res => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch(err => {
-        console.log(err);
-        alert(`Не удалось получить ответ от сервера. \n${err}`);
-      });
+  const currentUser = React.useContext(CurrentUserContext);
 
-    api.getInitialCards()
-      .then(res => {
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((res) => {
         setCards(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
       });
@@ -34,23 +23,39 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   return (
     <main className="content">
       <section className="profile" aria-label="Данные профиля">
-        <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}>
-          <button type="button" className="profile__avatar-button" aria-label="Изменить аватар" onClick={onEditAvatar}/>
+        <div
+          className="profile__avatar"
+          style={{ backgroundImage: `url(${currentUser.avatar})` }}
+        >
+          <button
+            type="button"
+            className="profile__avatar-button"
+            aria-label="Изменить аватар"
+            onClick={onEditAvatar}
+          />
         </div>
         <div className="profile__info">
-          <h1 className="profile__name">{userName}</h1>
-          <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={onEditProfile}/>
-          <p className="profile__description">{userDescription}</p>
+          <h1 className="profile__name">{currentUser.name}</h1>
+          <button
+            type="button"
+            className="button profile__edit-button"
+            aria-label="Редактировать"
+            onClick={onEditProfile}
+          />
+          <p className="profile__description">{currentUser.about}</p>
         </div>
-        <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={onAddPlace}/>
+        <button
+          type="button"
+          className="button profile__add-button"
+          aria-label="Добавить"
+          onClick={onAddPlace}
+        />
       </section>
       <section className="cards" aria-label="Карточки профиля">
         <ul className="cards__list">
-          {
-            cards.map(card =>
-              <Card key={card._id} card={card} onCardClick={onCardClick} />
-            )
-          }
+          {cards.map((card) => (
+            <Card key={card._id} card={card} onCardClick={onCardClick} />
+          ))}
         </ul>
       </section>
     </main>
