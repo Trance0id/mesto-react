@@ -35,9 +35,29 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((prevCards) =>
+          prevCards.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Не удалось получить ответ от сервера. \n${err}`);
+      });
+  }
+
+  function handleCardDelete(cardId) {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((prevCards) => prevCards.filter((c) => c._id !== cardId));
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Не удалось получить ответ от сервера. \n${err}`);
+      });
   }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -85,6 +105,7 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
 

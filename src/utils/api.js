@@ -43,6 +43,10 @@ class Api {
       ? this._callFetch(`cards/${cardId}/likes`, "PUT")
       : this._callFetch(`cards/${cardId}/likes`, "DELETE");
   }
+
+  deleteCard(cardId) {
+    return this._callFetch(`cards/${cardId}`, "DELETE");
+  }
 }
 
 const api = new Api(API_CONFIG);
