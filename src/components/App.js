@@ -67,13 +67,11 @@ function App() {
       .setUserInfo(userInfo)
       .then((res) => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
-      })
-      .finally(() => {
-        closeAllPopups();
       });
   }
 
@@ -82,13 +80,11 @@ function App() {
       .addNewPlace(newCard)
       .then((res) => {
         setCards([res, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
-      })
-      .finally(() => {
-        closeAllPopups();
       });
   }
 
@@ -97,13 +93,11 @@ function App() {
       .setUserAvatar(userAvatar)
       .then((res) => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
-      })
-      .finally(() => {
-        closeAllPopups();
       });
   }
 
