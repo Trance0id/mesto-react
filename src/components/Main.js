@@ -1,10 +1,10 @@
 import React from "react";
-import { CardsContext } from "../contexts/CardsContext.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import api from "../utils/api.js";
 import Card from "./Card.js";
 
 function Main({
+  cards,
   onEditAvatar,
   onEditProfile,
   onAddPlace,
@@ -13,7 +13,6 @@ function Main({
   onCardDelete,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const cards = React.useContext(CardsContext);
 
   return (
     <main className="content">

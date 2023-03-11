@@ -47,6 +47,10 @@ class Api {
   deleteCard(cardId) {
     return this._callFetch(`cards/${cardId}`, "DELETE");
   }
+
+  setUserInfo(body) {
+    return this._callFetch("users/me", "PATCH", body, "application/json");
+  }
 }
 
 const api = new Api(API_CONFIG);
