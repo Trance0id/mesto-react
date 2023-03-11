@@ -8,6 +8,7 @@ import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
   function handleEditAvatarClick() {
@@ -66,11 +67,28 @@ function App() {
       .setUserInfo(userInfo)
       .then((res) => {
         setCurrentUser(res);
-        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
+      });
+  }
+
+  function handleAddPlace(newCard) {
+    api
+      .addNewPlace(newCard)
+      .then((res) => {
+        setCards([res, ...cards]);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
@@ -79,11 +97,13 @@ function App() {
       .setUserAvatar(userAvatar)
       .then((res) => {
         setCurrentUser(res);
-        closeAllPopups();
       })
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
@@ -92,27 +112,15 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-
   const [selectedCard, setSelectedCard] = React.useState({});
-
   const [currentUser, setCurrentUser] = React.useState({});
-
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.error(err);
-        alert(`Не удалось получить ответ от сервера. \n${err}`);
-      });
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then((results) => {
+        setCurrentUser(results[0]);
+        setCards(results[1]);
       })
       .catch((err) => {
         console.log(err);
@@ -141,33 +149,11 @@ function App() {
           onUpdateUser={handleUpdateUser}
         />
 
-        <PopupWithForm
-          title="Новое место"
-          name="add"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            className="popup__input"
-            name="name"
-            placeholder="Название"
-            required
-            minLength="2"
-            maxLength="30"
-            autoComplete="off"
-          />
-          <div className="popup__error name-error"></div>
-          <input
-            type="url"
-            className="popup__input"
-            name="link"
-            placeholder="Ссылка на картинку"
-            required
-            autoComplete="off"
-          />
-          <div className="popup__error link-error"></div>
-        </PopupWithForm>
+          onAddPlace={handleAddPlace}
+        />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

@@ -52,6 +52,10 @@ class Api {
     return this._callFetch("users/me", "PATCH", body, "application/json");
   }
 
+  addNewPlace(body) {
+    return this._callFetch("cards", "POST", body, "application/json");
+  }
+
   setUserAvatar(body) {
     return this._callFetch(
       "users/me/avatar",
