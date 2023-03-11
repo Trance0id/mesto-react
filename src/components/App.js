@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup.js";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
 
 function App() {
   function handleEditAvatarClick() {
@@ -63,6 +64,19 @@ function App() {
   function handleUpdateUser(userInfo) {
     api
       .setUserInfo(userInfo)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(`Не удалось получить ответ от сервера. \n${err}`);
+      });
+  }
+
+  function handleUpdateAvatar(userAvatar) {
+    api
+      .setUserAvatar(userAvatar)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -155,24 +169,11 @@ function App() {
           <div className="popup__error link-error"></div>
         </PopupWithForm>
 
-        <PopupWithForm
-          title="Обновить аватар"
-          name="avatar"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            className="popup__input"
-            name="avatar"
-            placeholder="Ссылка на аватар"
-            required
-            minLength="2"
-            maxLength="30"
-            autoComplete="off"
-          />
-          <div className="popup__error avatar-error"></div>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
         <PopupWithForm title="Вы уверены?" name="delete" />
 

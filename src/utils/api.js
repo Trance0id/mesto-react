@@ -51,6 +51,15 @@ class Api {
   setUserInfo(body) {
     return this._callFetch("users/me", "PATCH", body, "application/json");
   }
+
+  setUserAvatar(body) {
+    return this._callFetch(
+      "users/me/avatar",
+      "PATCH",
+      body,
+      "application/json"
+    );
+  }
 }
 
 const api = new Api(API_CONFIG);
