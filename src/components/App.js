@@ -2,13 +2,13 @@ import React from "react";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
-import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
+// import PopupWithForm from "./PopupWithForm.js";
 
 function App() {
   function handleEditAvatarClick() {
@@ -160,8 +160,8 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-
-        <PopupWithForm title="Вы уверены?" name="delete" />
+        {/* To be done soon */}
+        {/* <PopupWithForm title="Вы уверены?" name="delete" /> */}
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </CurrentUserContext.Provider>

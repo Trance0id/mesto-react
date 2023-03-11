@@ -1,6 +1,5 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
-import api from "../utils/api.js";
 import Card from "./Card.js";
 
 function Main({
