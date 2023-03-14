@@ -63,6 +63,7 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
+    setFormIsLoading(true);
     api
       .setUserInfo(userInfo)
       .then((res) => {
@@ -72,10 +73,14 @@ function App() {
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        setFormIsLoading(false);
       });
   }
 
   function handleAddPlace(newCard) {
+    setFormIsLoading(true);
     api
       .addNewPlace(newCard)
       .then((res) => {
@@ -85,10 +90,14 @@ function App() {
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        setFormIsLoading(false);
       });
   }
 
   function handleUpdateAvatar(userAvatar) {
+    setFormIsLoading(true);
     api
       .setUserAvatar(userAvatar)
       .then((res) => {
@@ -98,6 +107,9 @@ function App() {
       .catch((err) => {
         console.error(err);
         alert(`Не удалось получить ответ от сервера. \n${err}`);
+      })
+      .finally(() => {
+        setFormIsLoading(false);
       });
   }
 
@@ -109,6 +121,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [formIsLoading, setFormIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -141,18 +154,21 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          formIsLoading={formIsLoading}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
+          formIsLoading={formIsLoading}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          formIsLoading={formIsLoading}
         />
         {/* To be done soon */}
         {/* <PopupWithForm title="Вы уверены?" name="delete" /> */}
