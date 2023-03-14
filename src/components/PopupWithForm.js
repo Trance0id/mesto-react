@@ -7,6 +7,7 @@ function PopupWithForm({
   onSubmit,
   formIsLoading,
   submitButtonText,
+  submitButtonValidity,
 }) {
   return (
     <div
@@ -23,7 +24,13 @@ function PopupWithForm({
         <h3 className="popup__heading">{title}</h3>
         <form name={name} className="popup__form" onSubmit={onSubmit}>
           {children}
-          <button type="submit" className="button popup__button">
+          <button
+            type="submit"
+            className={`button popup__button ${
+              submitButtonValidity ? "" : "popup__button_disabled"
+            }`}
+            disabled={!submitButtonValidity}
+          >
             {formIsLoading ? "Подождите..." : submitButtonText}
           </button>
         </form>

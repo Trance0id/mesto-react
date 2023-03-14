@@ -1,30 +1,23 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
+import useValidation from "../hooks/useValidation.js";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
   function handleSubmit(e) {
     e.preventDefault();
 
     onAddPlace({
-      name,
-      link,
+      name: validation.inputValues.name,
+      link: validation.inputValues.link,
     });
+
+    // validation.resetForm();
   }
 
-  function onNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function onLinkChange(e) {
-    setLink(e.target.value);
-  }
-
-  const [name, setName] = React.useState("");
-  const [link, setLink] = React.useState("");
+  const validation = useValidation();
 
   React.useEffect(() => {
-    setName("");
-    setLink("");
+    validation.resetForm();
   }, [isOpen]);
 
   return (
@@ -35,6 +28,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       formIsLoading={formIsLoading}
+      submitButtonValidity={validation.isFormValid}
       submitButtonText="Добавить"
     >
       <input
@@ -46,10 +40,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
         minLength="2"
         maxLength="30"
         autoComplete="off"
-        value={name || ""}
-        onChange={onNameChange}
+        value={validation.inputValues.name || ""}
+        onChange={validation.onInputChange}
       />
-      <div className="popup__error name-error"></div>
+      <div className="popup__error">{validation.errors.name}</div>
       <input
         type="url"
         className="popup__input"
@@ -57,10 +51,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
         placeholder="Ссылка на картинку"
         required
         autoComplete="off"
-        value={link || ""}
-        onChange={onLinkChange}
+        value={validation.inputValues.link || ""}
+        onChange={validation.onInputChange}
       />
-      <div className="popup__error link-error"></div>
+      <div className="popup__error">{validation.errors.link}</div>
     </PopupWithForm>
   );
 }
