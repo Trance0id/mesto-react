@@ -22,6 +22,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, formIsLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       formIsLoading={formIsLoading}
+      submitButtonText="Обновить"
     >
       <input
         ref={avatar}

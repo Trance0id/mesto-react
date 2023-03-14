@@ -35,6 +35,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       formIsLoading={formIsLoading}
+      submitButtonText="Добавить"
     >
       <input
         type="text"

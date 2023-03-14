@@ -6,6 +6,7 @@ function PopupWithForm({
   onClose,
   onSubmit,
   formIsLoading,
+  submitButtonText,
 }) {
   return (
     <div
@@ -23,7 +24,7 @@ function PopupWithForm({
         <form name={name} className="popup__form" onSubmit={onSubmit}>
           {children}
           <button type="submit" className="button popup__button">
-            {formIsLoading ? "Сохранение..." : "Сохранить"}
+            {formIsLoading ? "Подождите..." : submitButtonText}
           </button>
         </form>
       </div>
