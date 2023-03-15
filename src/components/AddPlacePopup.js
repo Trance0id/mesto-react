@@ -10,8 +10,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, formIsLoading }) {
       name: validation.inputValues.name,
       link: validation.inputValues.link,
     });
-
-    // validation.resetForm();
   }
 
   const validation = useValidation();

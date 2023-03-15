@@ -1,6 +1,7 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import PopupWithForm from "./PopupWithForm.js";
+// import useValidation from "../hooks/useValidation.js";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
   function handleNameChange(e) {
@@ -20,6 +21,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
     });
   }
 
+  // const validation = useValidation();
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 

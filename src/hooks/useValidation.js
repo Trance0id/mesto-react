@@ -5,7 +5,7 @@ export default function useValidation() {
   const [errors, setErrors] = React.useState({ dummy: "lorem ipsum" });
   const [isFormValid, setIsFormValid] = React.useState(false);
 
-  function checkFormValidity() {}
+  // function checkFormValidity() {}
 
   function onInputChange(e) {
     setInputValues((inputs) => ({
@@ -25,6 +25,8 @@ export default function useValidation() {
         .every((item) => errors[item] === "")
     );
   }, [errors]);
+
+  React.useEffect(() => {}, []);
 
   function resetForm() {
     setInputValues({});

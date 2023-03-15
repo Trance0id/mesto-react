@@ -151,14 +151,12 @@ function App() {
 
   function handleKeyDown(e) {
     if (e.key === "Escape") {
-      console.log("ESC");
       closeAllPopups();
     }
   }
 
   function addKeyListener() {
     document.addEventListener("keydown", handleKeyDown);
-    console.log("listener added");
   }
 
   React.useEffect(addKeyListener, []);
