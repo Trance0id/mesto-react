@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 function PopupWithForm({
   name,
   title,
@@ -13,6 +14,10 @@ function PopupWithForm({
     <div
       className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}
       onClick={onClose}
+      // onKeyDown={(e) => {
+      //   console.log("Key pressed!");
+      //   handleKeyPress(e);
+      // }}
     >
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>
         <button
