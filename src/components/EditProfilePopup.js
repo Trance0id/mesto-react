@@ -1,35 +1,27 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import PopupWithForm from "./PopupWithForm.js";
-// import useValidation from "../hooks/useValidation.js";
+import useValidation from "../hooks/useValidation.js";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function handleDescriptionChange(e) {
-    setDescription(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
 
     onUpdateUser({
-      name,
-      about: description,
+      name: validation.inputValues.name,
+      about: validation.inputValues.about,
     });
   }
 
-  // const validation = useValidation();
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
+  const validation = useValidation();
 
   const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    validation.resetForm({
+      name: currentUser.name,
+      about: currentUser.about,
+    });
   }, [currentUser, isOpen]);
 
   return (
@@ -40,6 +32,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       formIsLoading={formIsLoading}
+      submitButtonValidity={validation.isFormValid}
       submitButtonText="Сохранить"
     >
       <input
@@ -51,10 +44,10 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
         minLength="2"
         maxLength="40"
         autoComplete="off"
-        value={name || ""}
-        onChange={handleNameChange}
+        value={validation.inputValues.name || ""}
+        onChange={validation.onInputChange}
       />
-      <div className="popup__error name-error"></div>
+      <div className="popup__error">{validation.errors.name}</div>
       <input
         type="text"
         placeholder="Вид деятельности"
@@ -64,10 +57,10 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, formIsLoading }) {
         minLength="2"
         maxLength="200"
         autoComplete="off"
-        value={description || ""}
-        onChange={handleDescriptionChange}
+        value={validation.inputValues.about || ""}
+        onChange={validation.onInputChange}
       />
-      <div className="popup__error about-error"></div>
+      <div className="popup__error">{validation.errors.about}</div>
     </PopupWithForm>
   );
 }

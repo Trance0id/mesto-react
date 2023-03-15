@@ -2,10 +2,8 @@ import React from "react";
 
 export default function useValidation() {
   const [inputValues, setInputValues] = React.useState({});
-  const [errors, setErrors] = React.useState({ dummy: "lorem ipsum" });
+  const [errors, setErrors] = React.useState({});
   const [isFormValid, setIsFormValid] = React.useState(false);
-
-  // function checkFormValidity() {}
 
   function onInputChange(e) {
     setInputValues((inputs) => ({
@@ -16,21 +14,12 @@ export default function useValidation() {
       ...errors,
       [e.target.name]: e.target.validationMessage,
     }));
+    setIsFormValid(e.target.closest("form").checkValidity());
   }
 
-  React.useEffect(() => {
-    setIsFormValid(
-      Object.keys(errors)
-        .filter((item) => item !== "dummy")
-        .every((item) => errors[item] === "")
-    );
-  }, [errors]);
-
-  React.useEffect(() => {}, []);
-
-  function resetForm() {
-    setInputValues({});
-    setErrors({ dummy: "lorem ipsum" });
+  function resetForm(userInfo = {}) {
+    setInputValues(userInfo);
+    setErrors({});
     setIsFormValid(false);
   }
 

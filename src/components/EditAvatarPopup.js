@@ -1,18 +1,21 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
+import useValidation from "../hooks/useValidation.js";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, formIsLoading }) {
   function handleSubmit(e) {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: avatar.current.value,
+      avatar: validation.inputValues.avatar,
     });
-
-    avatar.current.value = "";
   }
 
-  const avatar = React.useRef();
+  React.useEffect(() => {
+    validation.resetForm();
+  }, [isOpen]);
+
+  const validation = useValidation();
 
   return (
     <PopupWithForm
@@ -22,19 +25,21 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, formIsLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       formIsLoading={formIsLoading}
+      submitButtonValidity={validation.isFormValid}
       submitButtonText="Обновить"
     >
       <input
-        ref={avatar}
-        type="text"
+        type="url"
         className="popup__input"
         name="avatar"
         placeholder="Ссылка на аватар"
         required
         minLength="2"
         autoComplete="off"
+        value={validation.inputValues.avatar}
+        onChange={validation.onInputChange}
       />
-      <div className="popup__error avatar-error"></div>
+      <div className="popup__error">{validation.errors.avatar}</div>
     </PopupWithForm>
   );
 }
